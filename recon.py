@@ -4,22 +4,19 @@ from openpyxl import load_workbook
 from tkinter import filedialog
 
 # Specify the folder path where the Excel files are located
-folder_path = filedialog.askdirectory()
-# folder_path = r"D:\1 - Coding and Course Work\My Apps\5 - Projects\Dad - Drop Recon\Excel Sheets"
+folder_path = filedialog.askdirectory(title='Select Cash Up Folder')
 
 # Collect all Excel files in the folder
 excel_files = [f for f in os.listdir(folder_path) if f.endswith('.xlsx')]
 
-# Check for ecel temp files
+# Check for excel temp files
 excel_files_filtered = []
 for x in excel_files:
-    # print(x)
     if not x.startswith('~$'):
         excel_files_filtered.append(x)
         
 # Specify the output file path
-output_file = filedialog.askopenfilename()
-# output_file = r"D:\1 - Coding and Course Work\My Apps\5 - Projects\Dad - Drop Recon\Drops\06 CASH DROPS DAILY August 2023.xlsx"
+output_file = filedialog.askopenfilename(title='Select Drop Sheet')
 
 # Load the output workbook
 output_workbook = load_workbook(output_file)
@@ -29,7 +26,7 @@ output_worksheet = output_workbook.active
 start_row = 5
 start_column = 5  # Column E
 
-# Loop through each Excel file
+# Loop through each Excel file and extract data
 for file in excel_files_filtered:
     file_path = os.path.join(folder_path, file)
 
